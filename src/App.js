@@ -7,7 +7,8 @@ import data from './data.js'
 
 function App() {
 
-  let [shoes] = useState()
+  let [shoes] = useState(data)
+
 
   return (
     <div className="App">
@@ -25,25 +26,27 @@ function App() {
       <div className='main-bg'/>
       <Container>
       <Row>
-        <Col sm>
-          <img src= "https://codingapple1.github.io/shop/shoes1.jpg" width = "80%"/>
-          <h4>{data[0].title}</h4>
-          <p>{data[0].content}</p>
-        </Col>
-        <Col sm>
-          <img src= "https://codingapple1.github.io/shop/shoes2.jpg" width = "80%"/>
-          <h4>{data[1].title}</h4>
-          <p>{data[1].content}</p>
-        </Col>
-        <Col sm>
-          <img src= "https://codingapple1.github.io/shop/shoes3.jpg" width = "80%"/>
-          <h4>{data[2].title}</h4>
-          <p>{data[2].content}</p>
-        </Col>
+        {
+          shoes.map(function(a, i){
+            return (
+              <Card shoes = {shoes[i]}/>
+            )
+          })
+        }
       </Row>
     </Container>
     </div>
   );
+}
+
+function Card(props) {
+  return (
+    <Col sm>
+          <img src = {props.shoes.img} width = "80%"/>
+          <h4>{props.shoes.title}</h4>
+          <p>{props.shoes.price}</p>
+    </Col>
+  )
 }
 
 export default App;
