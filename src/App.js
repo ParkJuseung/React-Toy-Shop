@@ -3,9 +3,11 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
 import data from './data.js'
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useParams } from 'react-router-dom';
 
 function App() {
+  let [shoes] = useState(data)
+
 
   return (
     <div className="App">
@@ -26,9 +28,10 @@ function App() {
       </Navbar>
 
     <Routes>  
-      <Route path = '/' element = {<Main/>}/>
-      <Route path = '/detail' element = { <Detail/>}/>
-      <Route path = '/about' element={<div>about페이지임</div>}/>
+      <Route path = '/' element = {<Main shoes = {shoes}/>}/>
+      <Route path = '/detail/:id' element = { <Detail shoes = {shoes}/>}/>
+      <Route path = '/detail/:id' element = { <Detail shoes = {shoes}/>}/>
+      <Route path = '/detail/:id' element = { <Detail shoes = {shoes}/>}/>
     </Routes>
      
     </div>
@@ -36,16 +39,16 @@ function App() {
 }
 
 function Main(props){
-  let [shoes] = useState(data)
+
   return(
     <>
     <div className='main-bg'/>
     <Container>
     <Row>
       {
-        shoes.map(function(a, i){
+        props.shoes.map(function(a, i){
           return (
-            <Card shoes = {shoes[i]}/>
+            <Card shoes = {props.shoes[i]}/>
           )
         })
       }
@@ -56,6 +59,9 @@ function Main(props){
 
 }
 function Detail(props) {
+  let {id} = useParams();
+
+
   return (
     <div className="container">
     <div className="row">
@@ -63,9 +69,9 @@ function Detail(props) {
         <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
       </div>
       <div className="col-md-6">
-        <h4 className="pt-5">상품명</h4>
-        <p>상품설명</p>
-        <p>120000원</p>
+        <h4 className="pt-5">{props.shoes[id].title}</h4>
+        <p>{props.shoes[id].content}</p>
+        <p>{props.shoes[id].price}</p>
         <button className="btn btn-danger">주문하기</button> 
       </div>
     </div>
