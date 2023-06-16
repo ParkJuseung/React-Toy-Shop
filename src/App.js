@@ -4,10 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
 import data from './data.js'
 import { Routes, Route, Link, useParams } from 'react-router-dom';
+import Detail from './Detail';
 
 function App() {
   let [shoes] = useState(data)
-
 
   return (
     <div className="App">
@@ -58,26 +58,7 @@ function Main(props){
   )
 
 }
-function Detail(props) {
-  let {id} = useParams();
 
-
-  return (
-    <div className="container">
-    <div className="row">
-      <div className="col-md-6">
-        <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
-      </div>
-      <div className="col-md-6">
-        <h4 className="pt-5">{props.shoes[id].title}</h4>
-        <p>{props.shoes[id].content}</p>
-        <p>{props.shoes[id].price}</p>
-        <button className="btn btn-danger">주문하기</button> 
-      </div>
-    </div>
-  </div> 
-  )
-}
 
 function Card(props) {
   return (
