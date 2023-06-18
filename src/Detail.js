@@ -8,7 +8,9 @@ function Detail(props) {
   
     useEffect(() => {
       setTimeout(() => {setalert(false)}, 2000);
-    })
+    },[])
+
+    
     return (
       <div className="container">
         {
