@@ -5,6 +5,7 @@ import {Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
 import data from './data.js'
 import { Routes, Route, Link, useParams } from 'react-router-dom';
 import Detail from './Detail';
+import axios from 'axios'
 
 function App() {
   let [shoes] = useState(data)
@@ -33,7 +34,13 @@ function App() {
       <Route path = '/detail/:id' element = { <Detail shoes = {shoes}/>}/>
       <Route path = '/detail/:id' element = { <Detail shoes = {shoes}/>}/>
     </Routes>
-     
+     <button onClick={() => {
+      axios.get('https://codingapple1.github.io/shop/data2.json')
+      .then((data) => {console.log(data.data)})
+      .catch(() => {
+        console.log('error')
+      })
+     }}>버튼</button>
     </div>
   );
 }
