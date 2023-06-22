@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import {Nav} from "react-bootstrap"
 
 
 function Detail(props) {
     let {id} = useParams();
     let [alert, setalert]= useState(true);
+    let [tab, settab] = useState(0);
+
   
     useEffect(() => {
       setTimeout(() => {setalert(false)}, 2000);
@@ -31,8 +34,23 @@ function Detail(props) {
           <button className="btn btn-danger">주문하기</button> 
         </div>
       </div>
+
+      <Nav justify variant="tabs" defaultActiveKey="/link-0">
+      <Nav.Item>
+        <Nav.Link eventKey="/link-0" onClick={() => settab(0)}>버튼 0</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-1" onClick={() => settab(1)}>버튼 1</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-2" onClick={() => settab(2)}>버튼 2</Nav.Link>
+      </Nav.Item>
+    </Nav>
+    <Viewtab tab = {tab}/>
     </div> 
     )
   }
-
+function Viewtab(props){
+  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][props.tab]
+}
   export default Detail;

@@ -8,20 +8,16 @@ import Detail from './Detail';
 import axios from 'axios'
 
 function App() {
-  let [shoes] = useState(data)
+  let [shoes, setshoes] = useState(data)
 
   return (
     <div className="App">
     <Link to = "/detail">상세페이지</Link>
-
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="#home">Shoes Shop</Navbar.Brand>
           <Nav className="me-auto">
-            <Link to = "/">
-            <Nav.Link href="#home">Home</Nav.Link>
-            </Link>
-              
+            <Link to = "/"><Nav.Link href="#home">Home</Nav.Link></Link>
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
@@ -36,11 +32,14 @@ function App() {
     </Routes>
      <button onClick={() => {
       axios.get('https://codingapple1.github.io/shop/data2.json')
-      .then((data) => {console.log(data.data)})
+      .then((data) => {
+        let copy = [...shoes, ...data.data]
+        setshoes(copy);
+      })
       .catch(() => {
         console.log('error')
       })
-     }}>버튼</button>
+     }}>더보기</button>
     </div>
   );
 }
@@ -55,7 +54,7 @@ function Main(props){
       {
         props.shoes.map(function(a, i){
           return (
-            <Card shoes = {props.shoes[i]}/>
+            <Card shoes = {props.shoes[i]} i = {i+1}/>
           )
         })
       }
@@ -70,7 +69,7 @@ function Main(props){
 function Card(props) {
   return (
     <Col sm>
-          <img src = {props.shoes.img} width = "80%"/>
+          <img src = {'https://codingapple1.github.io/shop/shoes' + props.i +'.jpg'} width = "80%"/>
           <h4>{props.shoes.title}</h4>
           <p>{props.shoes.price}</p>
     </Col>
