@@ -51,6 +51,16 @@ function Detail(props) {
     )
   }
 function Viewtab(props){
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][props.tab]
+  let[fade, setfade] = useState('')
+  useEffect(() =>{
+    setTimeout(() => {
+      setfade('end')
+    }, 100);
+    setfade('')
+  }, [props.tab])
+  return <div className={"start " + fade}>
+  {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][props.tab]}
+  </div>
+
 }
   export default Detail;
