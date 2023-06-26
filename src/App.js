@@ -5,11 +5,12 @@ import {Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
 import data from './data.js'
 import { Routes, Route, Link, useParams } from 'react-router-dom';
 import Detail from './Detail';
+import Cart from './Cart';
 import axios from 'axios'
+
 
 function App() {
   let [shoes, setshoes] = useState(data)
-
   return (
     <div className="App">
     <Link to = "/detail">상세페이지</Link>
@@ -27,9 +28,9 @@ function App() {
     <Routes>  
       <Route path = '/' element = {<Main shoes = {shoes}/>}/>
       <Route path = '/detail/:id' element = { <Detail shoes = {shoes}/>}/>
-      <Route path = '/detail/:id' element = { <Detail shoes = {shoes}/>}/>
-      <Route path = '/detail/:id' element = { <Detail shoes = {shoes}/>}/>
+      <Route path = '/cart' element = {<Cart/>}/>
     </Routes>
+
      <button onClick={() => {
       axios.get('https://codingapple1.github.io/shop/data2.json')
       .then((data) => {
