@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { increase } from './store';
+import { increase } from './store/userSlice.js';
 
 function Cart() {
     // 모든 props를 redux에 넣는것은 좋지 않다
@@ -14,7 +14,7 @@ function Cart() {
         <div>
             <h6>{state.user.name}의 장바구니{state.user.age}</h6>
             <button onClick={()=>{
-                dispatch(increase())
+                dispatch(increase(10))
             }}>버튼</button>
             <Table>
                 <thead>
