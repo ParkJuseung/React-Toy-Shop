@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
 import data from './data.js'
@@ -10,7 +10,24 @@ import axios from 'axios'
 
 
 function App() {
+  useEffect(()=>
+  localStorage.setItem('watched', JSON.stringify([]))
+  )
+  
   let [shoes, setshoes] = useState(data)
+
+
+  //새로고침하면 데이터가 초기화되는게 싫으면 db에 저장해놔야 한다.
+  // 원래는 백엔드에 저장해야 하지만 야매로 localstorage에 저장 할 수 있다.
+  // session storage는 휘발성 
+  // array나 object는 저장할 수 없지만 JSON형태로 바꾸면 가능함
+  let obj = {name : 'kim'}
+  // array/object를 JSON으로 변환
+  // localStorage에 저장
+  let 꺼낸거 =localStorage.setItem('data', JSON.stringify(obj));
+  //JSON을 array/object로 저장 
+  console.log(JSON.parse(꺼낸거))
+
   return (
     <div className="App">
     <Link to = "/detail">상세페이지</Link>
